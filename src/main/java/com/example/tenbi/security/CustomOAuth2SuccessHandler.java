@@ -65,7 +65,7 @@ public class CustomOAuth2SuccessHandler implements AuthenticationSuccessHandler 
 
         // Redirigimos **solo** con token y email (evita JSON en la URL).
         URI redirectUri = UriComponentsBuilder
-                .fromUriString("http://localhost:4200/login-success")
+                .fromUriString("https://tenbi-frontend-d1qz.vercel.app/login-success")
                 .queryParam("token", jwt)
                 .queryParam("email", usuario.getEmail())
                 .build()
