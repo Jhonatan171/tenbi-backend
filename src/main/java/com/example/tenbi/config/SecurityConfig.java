@@ -56,7 +56,7 @@ public class SecurityConfig {
                 )
                 //  Configura el flujo de OAuth2 pero sin forzar que /auth/google sea la página de login
                 .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl("http://localhost:4200/login-success", true)
+                        .defaultSuccessUrl("https://tenbi-frontend-d1qz.vercel.app/login-success", true)
                         .loginPage("/oauth2/authorization/google") // ruta estándar de Spring Security
                         .userInfoEndpoint(userInfo -> userInfo.userService(customOAuth2UserService))
                         .successHandler(customOAuth2SuccessHandler)
@@ -72,7 +72,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // tu frontend
+        configuration.setAllowedOrigins(List.of("https://tenbi-frontend-d1qz.vercel.app/")); // tu frontend
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
