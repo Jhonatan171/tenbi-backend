@@ -10,7 +10,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/guardados")
-@CrossOrigin(origins = "http://localhost:4200")
 public class GuardadoController {
 
     @Autowired
