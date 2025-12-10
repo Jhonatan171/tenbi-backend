@@ -44,7 +44,6 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/usuarios/login-tradicional",
                                 "/api/usuarios/registro",
-                                "/api/lineas-tiempo/**",
                                 "/api/guardados/mis-guardados",
                                 "/catalogos/**",
                                 "/auth/**",
