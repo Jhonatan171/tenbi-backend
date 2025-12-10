@@ -41,11 +41,10 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/lineas-tiempo").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/lineas-tiempo/**").permitAll()
                         .requestMatchers(
                                 "/api/usuarios/login-tradicional",
                                 "/api/usuarios/registro",
+                                "/api/lineas-tiempo/**",
                                 "/api/guardados/mis-guardados",
                                 "/catalogos/**",
                                 "/auth/**",
