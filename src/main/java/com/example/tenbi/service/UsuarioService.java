@@ -35,7 +35,6 @@ public class UsuarioService {
     private final NacionalidadRepository nacionalidadRepository;
     private final PasswordEncoder passwordEncoder;
     private final EmailService emailService; //Para recuperar la contraseña
-    private final CloudinaryService cloudinaryService;
 
     public RegistrationResponse registrarUsuario(RegistrationRequest req) {
         // 0) validar coincidencia de contraseñas
@@ -248,16 +247,19 @@ public class UsuarioService {
         Usuario usuario = usuarioRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado"));
 
-        String urlFoto;
+        // Aquí puedes guardar la foto en el servidor o en un bucket y guardar la URL
+        // Por ejemplo, lo guardamos en "/uploads/{filename}"
+        String nombreArchivo = "user_" + id + "_" + System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        Path rutaArchivo = Paths.get("uploads").resolve(nombreArchivo);
+
         try {
-            // SUBIMOS A CLOUDINARY Y OBTENEMOS LA URL
-            urlFoto = cloudinaryService.uploadFile(file, "perfiles");
+            Files.createDirectories(rutaArchivo.getParent());
+            Files.write(rutaArchivo, file.getBytes());
         } catch (IOException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al subir la foto de perfil a Cloudinary");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error al guardar la foto de perfil");
         }
 
-        // 3. GUARDAMOS LA URL COMPLETA
-        usuario.setFotoPerfil(urlFoto);
+        usuario.setFotoPerfil("/uploads/" + nombreArchivo);
         usuarioRepository.save(usuario);
 
         return new UsuarioDTO(
