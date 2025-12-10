@@ -19,7 +19,6 @@ import org.springframework.security.config.Customizer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import jakarta.servlet.http.HttpServletResponse;
 
 import java.util.List;
 
@@ -39,17 +38,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.GET, "/api/lineas-tiempo").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/lineas-tiempo/**").permitAll()
                         .requestMatchers(
                                 "/api/usuarios/login-tradicional",
                                 "/api/usuarios/registro",
-                                "/api/lineas-tiempo",   
-                                "/api/lineas-tiempo/**",
                                 "/api/guardados/mis-guardados",
-                                "/api/lineas-tiempo/{id}", 
-                                "/api/temas",
                                 "/catalogos/**",
                                 "/auth/**",
                                 "/oauth2/**",
@@ -76,8 +73,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://tenbi-frontend-d1qz.vercel.app","http://localhost:4200",
-                "http://localhost:3000")); // tu frontend
+        configuration.setAllowedOrigins(List.of("https://tenbi-frontend-d1qz.vercel.app")); // tu frontend
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
