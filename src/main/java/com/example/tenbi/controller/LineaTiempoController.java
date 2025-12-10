@@ -147,7 +147,7 @@ public class LineaTiempoController {
     public ResponseEntity<?> generarLinkPublico(@PathVariable Short id) {
         String token = lineaTiempoService.generarLinkPublico(id);
 
-        String url = "http://localhost:4200/ver/" + token;
+        String url = "https://tenbi-frontend-d1qz.vercel.app/ver/" + token;
 
         return ResponseEntity.ok(Map.of("token", token, "url", url));
     }
