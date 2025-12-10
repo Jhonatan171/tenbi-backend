@@ -44,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/api/usuarios/login-tradicional",
                                 "/api/usuarios/registro",
+                                "/api/lineas-tiempo/**",
                                 "/api/guardados/mis-guardados",
                                 "/catalogos/**",
                                 "/auth/**",
@@ -71,7 +72,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://tenbi-frontend-d1qz.vercel.app/")); // tu frontend
+        configuration.setAllowedOrigins(List.of("https://tenbi-frontend-d1qz.vercel.app")); // tu frontend
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
