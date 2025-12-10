@@ -32,12 +32,9 @@ public class LineaTiempoService {
     @Autowired
     private LinkPublicoRepository linkPublicoRepository;
 
-    @Autowired
-    private CloudinaryService cloudinaryService;
-
 
     private String guardarImagen(MultipartFile archivo) {
-        /*if (archivo == null || archivo.isEmpty()) return null;
+        if (archivo == null || archivo.isEmpty()) return null;
 
         try {
             String rutaDirectorio = System.getProperty("user.dir") + "/uploads/hitos/";
@@ -52,22 +49,11 @@ public class LineaTiempoService {
             return "/uploads/hitos/" + nombreArchivo;
         } catch (IOException e) {
             throw new RuntimeException("Error al guardar imagen: " + e.getMessage());
-        }*/
-        if (archivo == null || archivo.isEmpty()) return null;
-
-        try {
-            // LLAMAMOS AL SERVICIO DE CLOUDINARY EN VEZ DE MANEJAR ARCHIVOS LOCALES
-            // Le pasamos el archivo y una carpeta opcional (ej: "hitos")
-            return cloudinaryService.uploadFile(archivo, "hitos");
-
-        } catch (IOException e) {
-            // Manejo de errores
-            throw new RuntimeException("Error al subir imagen a Cloudinary: " + e.getMessage());
         }
     }
 
     private String guardarPortada(MultipartFile archivo) {
-        /*if (archivo == null || archivo.isEmpty()) return null;
+        if (archivo == null || archivo.isEmpty()) return null;
 
         try {
             String rutaDirectorio = System.getProperty("user.dir") + "/uploads/portadas/";
@@ -81,15 +67,6 @@ public class LineaTiempoService {
             return "/uploads/portadas/" + nombreArchivo;
         } catch (IOException e) {
             throw new RuntimeException("Error al guardar portada: " + e.getMessage());
-        }*/
-        if (archivo == null || archivo.isEmpty()) return null;
-
-        try {
-            // Llamamos al servicio de Cloudinary, usando otra carpeta (ej: "portadas")
-            return cloudinaryService.uploadFile(archivo, "portadas");
-
-        } catch (IOException e) {
-            throw new RuntimeException("Error al subir portada a Cloudinary: " + e.getMessage());
         }
     }
 
