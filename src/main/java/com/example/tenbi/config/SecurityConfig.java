@@ -40,13 +40,11 @@ public class SecurityConfig {
         http
                 .cors(Customizer.withDefaults())
                 .csrf(csrf -> csrf.disable())
-                .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
                                 "/api/usuarios/login-tradicional",
                                 "/api/usuarios/registro",
+                                "/api/lineas-tiempo/**",
                                 "/api/guardados/mis-guardados",
                                 "/catalogos/**",
                                 "/auth/**",
@@ -54,7 +52,6 @@ public class SecurityConfig {
                                 "/public/**",
                                 "/uploads/**"
                         ).permitAll()
-                        .requestMatchers("/api/lineas-tiempo/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 //  Configura el flujo de OAuth2 pero sin forzar que /auth/google sea la página de login
