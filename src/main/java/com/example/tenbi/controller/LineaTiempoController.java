@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @RestController
 @RequestMapping("/api/lineas-tiempo")
-@CrossOrigin(origins = "https://tenbi-frontend-d1qz.vercel.app")
 public class LineaTiempoController {
 
     @Autowired
